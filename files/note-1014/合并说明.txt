@@ -52,3 +52,8 @@
 按水哥要求把 AMZ 美国站品牌增加到 1000 个以上：新增 640 个不重复品牌（20 个类目簇调研，冷门少见优先，硬排除家用大家电/汽配/摩配/电池电源主业/轮胎及 Samsung、Whirlpool、Midea、GE；与原 430 个品牌零重复）。
 新增行口径：channel=eBay、srcPlatform=eBay US、srcDate=2026-11-03，热度排序自原最大值续编。
 合并后：amz 1101 行 / 1070 品牌；全池总品牌 1211。原文件备份在 ~/workspace/compass_expand/pools_backup_before_1000.js，新增行原始数据在 ~/workspace/compass_expand/new_amz_rows.json。
+
+2026-11-03 清理（删没用的 + 中国品牌标红）
+========================================
+按水哥要求删掉没什么可做的：天文/光学/摄影类、家用机器人（扫地/扫拖/擦窗/家庭/教育等）类，以及与现行硬排除冲突的旧行（空调、家用热水器、大家电维修件品牌、行车记录仪、电视/显示器，含混入的 Midea），共删 82 行；保留误伤项：BAL Products（房车稳定器）、Truma/Suburban/Girard（房车热水器）、DJI（暂留，其 amz 行原为运动相机）。删后 amz 1019 行 / 994 品牌。删除清单在 ~/workspace/compass_expand/removed_rows_20261103.txt，删前备份 pools_before_prune_20261103.js。
+页面改动：中国品牌（按「品牌来源」判定）的品牌名在表格与详情里加浅红突出显示（.cn-hl，WPS 式底纹）。

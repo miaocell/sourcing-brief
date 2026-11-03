@@ -36,6 +36,13 @@
     return '';
   }
 
+  // ── 中国品牌判定：品牌名字加浅红突出显示（WPS 式）──
+  function isCnBrand(r) {
+    var src = pick(r, ['品牌来源', 'brandSource', 'origin', 'source']);
+    if (!src) return false;
+    return /^中国/.test(src) || src.indexOf('中国品牌') >= 0 || src.indexOf('中国出口') >= 0;
+  }
+
   // ── 价格解析：取区间上限 ──
   function priceHi(v) {
     if (v == null) return null;
@@ -340,7 +347,11 @@
         var td = document.createElement('td');
         var v = pick(r, c.keys);
         if (c.type === 'cat') { td.className = 'cell-cat'; td.textContent = v; }
-        else if (c.type === 'brand') { td.className = 'cell-brand'; td.textContent = v; }
+        else if (c.type === 'brand' || c.label === '品牌中文') {
+          if (c.type === 'brand') td.className = 'cell-brand';
+          if (isCnBrand(r) && v) { td.innerHTML = '<span class="cn-hl">' + esc(v) + '</span>'; }
+          else { td.textContent = v; }
+        }
         else if (c.type === 'model') { td.className = 'cell-model'; td.textContent = v; }
         else if (c.type === 'price') { td.className = 'cell-price'; td.textContent = v; }
         else if (c.type === 'channel') {
@@ -421,8 +432,8 @@
 
     var html = '';
     html += '<div class="modal-hero">';
-    html += '<div class="hero-en">' + esc(heroEn || '（无品牌名）') + '</div>';
-    if (heroCn && heroCn !== heroEn) html += '<div class="hero-cn">' + esc(heroCn) + '</div>';
+    html += '<div class="hero-en">' + (isCnBrand(r) && heroEn ? '<span class="cn-hl">' + esc(heroEn) + '</span>' : esc(heroEn || '（无品牌名）')) + '</div>';
+    if (heroCn && heroCn !== heroEn) html += '<div class="hero-cn">' + (isCnBrand(r) ? '<span class="cn-hl">' + esc(heroCn) + '</span>' : esc(heroCn)) + '</div>';
     html += '</div>';
     html += '<div class="modal-sub">' + esc(cat) + ' · ' + esc(POOL_LABEL[currentPool]) + '</div>';
 
