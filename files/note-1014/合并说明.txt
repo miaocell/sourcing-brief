@@ -1,0 +1,48 @@
+选品罗盘 · 本地版（合并版 2026-10-14）
+========================================
+本次合并：把 NAIWA 新增品牌包（102 个品牌 / 102 行）并入成品。
+
+- amz 美国池：+84 行（中文键，与原池一致）
+- mexico 墨西哥池：+6 行（英文键，mxn/usd 为整机价格口径，与原池一致）
+- poland 波兰池：+12 行（英文键，price 为整机价格 PLN 口径，与原池一致）
+
+合并后统计（页面顶栏自动重算，此处为写入值）：
+{
+  "amz": {
+    "brandCount": 430,
+    "rowCount": 461
+  },
+  "walmart": {
+    "brandCount": 58,
+    "rowCount": 59
+  },
+  "japan": {
+    "brandCount": 30,
+    "rowCount": 32
+  },
+  "mexico": {
+    "brandCount": 17,
+    "rowCount": 17
+  },
+  "poland": {
+    "brandCount": 36,
+    "rowCount": 40
+  },
+  "total": 571
+}
+
+价格门槛过滤（app.js 加载期自动执行）：
+- amz 新增行无 price 字段 → 豁免保留（与历史行同口径）
+- mexico 新增行 usd 整机价均 ≥ $300 → 保留
+- poland 新增行 11 行无价格豁免保留；Philips/Saeco 整机 2,000–4,000 PLN → 保留
+
+使用方法：解压后双击 index.html 即可（无需联网）。
+原文件未做任何修改，仅 data/pools.js 追加了新行。
+
+冒烟测试（2026-10-14，Node 加载 app.js 真实跑价格门槛）：
+- 页面打开无报错；顶栏显示品牌数 522（=469原有显示值+53；门槛过滤后口径）
+- 新增 102 行全部通过门槛进入内存池，无一被过滤
+- mexico/poland 被过滤的均为原有行（如波兰池原有 Xiaomi 两行整机 <$300），与本次合并无关
+
+跨池说明：Weber（新增在 poland 池，原 amz 池已有）、Xiaomi（新增在 mexico 池，原 poland 池已有）
+为不同站点证据，属正常跨池（原池本就存在 dji/bambu lab 跨 mexico+poland 的情况）。
