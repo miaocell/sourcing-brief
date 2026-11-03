@@ -58,3 +58,4 @@
 按水哥要求删掉没什么可做的：天文/光学/摄影类、家用机器人（扫地/扫拖/擦窗/家庭/教育等）类，以及与现行硬排除冲突的旧行（空调、家用热水器、大家电维修件品牌、行车记录仪、电视/显示器，含混入的 Midea），共删 82 行；保留误伤项：BAL Products（房车稳定器）、Truma/Suburban/Girard（房车热水器）、DJI（暂留，其 amz 行原为运动相机）。删后 amz 1019 行 / 994 品牌。删除清单在 ~/workspace/compass_expand/removed_rows_20261103.txt，删前备份 pools_before_prune_20261103.js。
 页面改动：中国品牌（按「品牌来源」判定）的品牌名在表格与详情里加浅红突出显示（.cn-hl，WPS 式底纹）。
 同日补回：按阿里巴巴国际站/eBay 类目挖法（类目先行、每品牌 eBay 抽查有零件在售才收）补 97 个品牌，amz 回到 1116 行 / 1091 品牌，全池总品牌 1232。新增行在 ~/workspace/compass_expand/new_amz_rows2.json，补前备份 pools_before_topup_20261103.js。
+同日第三轮（按国际站类目→Google 搜品牌的方法）：补 151 个品牌（动力传动、物料搬运、包装/印刷/注塑/食品机械、工业电气与检测、医疗耐用设备、工程与灌溉养殖、安全消防与功能家具等此前未挖方向；纺织大牌因 eBay 无机构件证据整批未收）。amz 现 1267 行 / 1242 品牌，全池总品牌 1383。新增行在 ~/workspace/compass_expand/new_amz_rows3.json。
