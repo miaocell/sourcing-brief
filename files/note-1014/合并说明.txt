@@ -46,3 +46,9 @@
 
 跨池说明：Weber（新增在 poland 池，原 amz 池已有）、Xiaomi（新增在 mexico 池，原 poland 池已有）
 为不同站点证据，属正常跨池（原池本就存在 dji/bambu lab 跨 mexico+poland 的情况）。
+
+2026-11-03 扩充（AMZ 美国池 430 → 1070 个品牌）
+========================================
+按水哥要求把 AMZ 美国站品牌增加到 1000 个以上：新增 640 个不重复品牌（20 个类目簇调研，冷门少见优先，硬排除家用大家电/汽配/摩配/电池电源主业/轮胎及 Samsung、Whirlpool、Midea、GE；与原 430 个品牌零重复）。
+新增行口径：channel=eBay、srcPlatform=eBay US、srcDate=2026-11-03，热度排序自原最大值续编。
+合并后：amz 1101 行 / 1070 品牌；全池总品牌 1211。原文件备份在 ~/workspace/compass_expand/pools_backup_before_1000.js，新增行原始数据在 ~/workspace/compass_expand/new_amz_rows.json。
