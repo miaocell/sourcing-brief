@@ -3,20 +3,6 @@
  "items": [
   {
    "avail": "More than 10 available",
-   "b": "Pentair",
-   "cond": "New",
-   "fit": "WhisperFlo / IntelliFlo 3HP；073131",
-   "grp": "销量带 50–100",
-   "id": "204372310683",
-   "loc": "Palmdale, CA",
-   "note": "描述含叶轮及密封组件；Item specifics MPN 栏另列 073130/071734S/357102，与标题号不一致，已披露",
-   "p": "叶轮",
-   "price": "US $49.00",
-   "sold": 97,
-   "t": "073131 Impeller for 3HP Pentair whisperflo and intelliflo pumps"
-  },
-  {
-   "avail": "More than 10 available",
    "b": "Hustler",
    "cond": "New",
    "fit": "Hustler 605777 / 605777K；Warner 5219-191",
@@ -70,34 +56,6 @@
    "price": "US $255.00",
    "sold": 86,
    "t": "CH11272 for JOHN DEERE 850 950 HYDRAULIC PUMP"
-  },
-  {
-   "avail": "3 available",
-   "b": "Simpson",
-   "cond": "New",
-   "fit": "Simpson AAA C31、31、32 系列泵；7113373",
-   "grp": "销量带 50–100",
-   "id": "387025402533",
-   "loc": "Waynesboro, PA",
-   "note": "含不锈钢阀座的卸荷阀组件；库存仅 3 件",
-   "p": "卸荷阀套件",
-   "price": "US $49.90",
-   "sold": 75,
-   "t": "7113373 Simpson Genuine OEM Unloader Kit for AAA C31,31,32 Pressure Washer Pumps"
-  },
-  {
-   "avail": "More than 10 available",
-   "b": "Pentair",
-   "cond": "New",
-   "fit": "WhisperFlo 3/4HP；073127",
-   "grp": "销量带 50–100",
-   "id": "203769464086",
-   "loc": "Palmdale, CA",
-   "note": "描述含叶轮及密封组件；Item specifics MPN 栏另列 073130/071734S/357102，与标题号不一致，已披露",
-   "p": "叶轮",
-   "price": "US $49.00",
-   "sold": 74,
-   "t": "073127 Impeller for 3/4HP Pentair whisperflo pump"
   },
   {
    "avail": "20 available",
@@ -156,20 +114,6 @@
    "t": "Beverage Air - 501-137B Fan Motor; 120V same day shipping"
   },
   {
-   "avail": "More than 10 available",
-   "b": "Ingersoll Rand",
-   "cond": "New",
-   "fit": "175/140 PSI、4 口；56288020、56288020-01",
-   "grp": "销量带 10–49",
-   "id": "276309936700",
-   "loc": "Hebron, KY",
-   "note": "仅写 For Ingersoll Rand，未列其他品牌适配",
-   "p": "压力开关",
-   "price": "US $48.00",
-   "sold": 41,
-   "t": "175/140 PSI - 4 Port Pressure Switch 56288020 56288020-01 For Ingersoll Rand"
-  },
-  {
    "avail": "6 available",
    "b": "John Deere",
    "cond": "New",
@@ -184,20 +128,6 @@
    "t": "Hydraulic Pump for John Deere 5075E 5075M 5103 5203 5303 Tractor RE223233 New"
   },
   {
-   "avail": "8 available",
-   "b": "Champion",
-   "cond": "New",
-   "fit": "Champion 75537i，3100 Watt RV 发电机",
-   "grp": "销量带 10–49",
-   "id": "265965645750",
-   "loc": "Houston, TX",
-   "note": "刊登未标独立零件号，以机型 75537i 为准",
-   "p": "化油器",
-   "price": "US $45.99",
-   "sold": 37,
-   "t": "OEM Carburetor Carb For Champion 75537i Champion 3100 Watt RV Generator"
-  },
-  {
    "avail": "4 available",
    "b": "Predator",
    "cond": "New",
@@ -210,20 +140,6 @@
    "price": "US $89.99",
    "sold": 33,
    "t": "Brass-gold Engine Starter for Predator Dual Fuel Inverter Generator 5000-Watt"
-  },
-  {
-   "avail": "3 available",
-   "b": "Champion",
-   "cond": "New",
-   "fit": "Champion 100296，439CC，7500/9375 Watts 汽油、6750/8400 Watts 丙烷，双燃料",
-   "grp": "销量带 10–49",
-   "id": "276534148774",
-   "loc": "Walnut, CA",
-   "note": "",
-   "p": "化油器",
-   "price": "US $49.99",
-   "sold": 32,
-   "t": "OEM Huayi Carburetor For Champion 100296 439CC 7500-Watts Dual Fuel Generator"
   },
   {
    "avail": "5 available",
@@ -294,20 +210,6 @@
    "price": "US $96.99",
    "sold": 12,
    "t": "Delfield RF000022 Refrigerator Fan Motor Kit"
-  },
-  {
-   "avail": "More than 10 available",
-   "b": "Hayward",
-   "cond": "New",
-   "fit": "Hayward Super Pump 2HP；SPX1621C",
-   "grp": "销量带 10–49",
-   "id": "205028091227",
-   "loc": "Sunland, CA",
-   "note": "销量带下限 10；品牌栏 Pool Princess、Manufacturer 为 Hayward、MPN 栏为 W3SP2607X10，与标题号不一致，已披露；批量价低于 $40，仅按单件标价判定达标",
-   "p": "叶轮",
-   "price": "US $45.99/ea",
-   "sold": 10,
-   "t": "Pool Princess Hayward 2 HP Impeller for Super Pump (SPX1621C)"
   },
   {
    "avail": "2 available",

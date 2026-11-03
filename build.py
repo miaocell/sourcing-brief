@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Build the sourcing brief site (index.html + records/*.md + data.json)
-from day files in days/ (one JSON per day, newest kept: last 7 days)."""
-import json, os, sys, glob, html
+from day files in days/ (one JSON per day, newest kept: last 7 days).
+Layout (2026-11-03): list-style rows, day selector tabs, default view
+shows only the newest day."""
+import json, os, sys, glob
 
 SRC = os.path.dirname(os.path.abspath(__file__))
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(SRC, "out")
@@ -32,28 +34,33 @@ h1{font-size:24px;margin:6px 0 2px}
 .stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:13px}
 .stat b{font-size:17px;margin-right:4px}
-.controls{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 2px}
+.tabs button{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13.5px;cursor:pointer}
+.tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px;position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5}
 .controls input,.controls select{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px}
 .controls input{flex:1;min-width:160px}
 .controls label{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px}
-.day{margin-top:26px}
+.day{margin-top:22px}
 .dayhead{border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:6px}
 .dayhead h2{font-size:19px;margin:0 0 4px}
 .dayhead .meta{color:var(--muted);font-size:13px}
 .daynote{color:var(--muted);font-size:13px;margin:6px 0 0}
 .grp{font-size:14px;color:var(--muted);margin:16px 0 2px;font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;margin-top:10px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
-.card .brand{font-weight:700;font-size:15px}
-.card .brand .part{font-weight:600}
+.list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.rowitem{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start}
+.rowitem .main{flex:1;min-width:0}
+.rowitem .brand{font-weight:700;font-size:15px}
+.rowitem .brand .part{font-weight:600}
 .badge{display:inline-block;background:var(--hot);color:#fff;border-radius:6px;font-size:11px;padding:1px 6px;margin-left:6px;vertical-align:2px}
-.title{color:var(--muted);font-size:12px;line-height:1.5}
-.row{display:flex;justify-content:space-between;font-size:13px}
-.row .k{color:var(--muted)}
-.price{font-size:16px;font-weight:700}
-.sold{font-weight:700}
-.note{font-size:12px;color:var(--muted);line-height:1.5}
-.card a{align-self:flex-start;margin-top:2px;color:var(--accent);text-decoration:none;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:5px 10px;background:var(--chip)}
+.title{color:var(--muted);font-size:12px;line-height:1.5;margin-top:2px}
+.fit{font-size:12px;color:var(--muted);margin-top:3px}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:3px}
+.side{text-align:right;flex-shrink:0}
+.price{font-size:16px;font-weight:700;white-space:nowrap}
+.sold{font-weight:700;font-size:13px;margin-top:2px}
+.meta2{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.6}
+.side a{display:inline-block;margin-top:6px;color:var(--accent);text-decoration:none;font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:4px 9px;background:var(--chip)}
 .empty{color:var(--muted);padding:24px 0;font-size:14px}
 footer{color:var(--muted);font-size:12px;margin-top:40px;line-height:1.7}
 </style>
@@ -61,8 +68,9 @@ footer{color:var(--muted);font-size:12px;margin-top:40px;line-height:1.7}
 <body>
 <div class="wrap">
 <h1>选品早报</h1>
-<div class="sub">范围：eBay US 配件选品。口径：配件 ≥$50；候选须在刊登页显示 sold 10–200（50–100 最佳）；每天 10–20 条（至少 10 条）；排除汽车配件、家用大家电整类、电池/电源、轮胎/内胎、液体、重复耗材、空调、车库门及三星/惠而浦/美的/GE 品牌，房车/商用制冷除外。各期按日期分区、新期在上，本页保留最近 7 天。</div>
+<div class="sub">范围：eBay US 配件选品。口径：配件 ≥$50（缝纫机配件 ≥$100）；候选须在刊登页显示 sold 10–200（50–100 最佳）；每天至少 10 条；排除汽车/摩托车配件、家用大家电整类、电池/电源、轮胎/内胎、液体、重复耗材、空调、车库门及三星/惠而浦/美的/GE 品牌，房车/商用制冷除外。点日期切换看前几天的，默认只显示最新一天；本页保留最近 7 天。</div>
 <div class="stats" id="stats"></div>
+<div class="tabs" id="tabs"></div>
 <div class="controls">
 <input id="q" type="search" placeholder="搜索品牌、零件、零件号、标题…">
 <select id="brand"><option value="">全部品牌</option></select>
@@ -90,19 +98,39 @@ document.getElementById('stats').innerHTML =
   `<div class="stat"><b>${allBrands.length}</b>个品牌</div>` +
   `<div class="stat"><b>${DAYS.length}</b>期</div>` +
   (DAYS.length ? `<div class="stat">最新一期 <b>${DAYS[0].date}</b></div>` : '');
+let selDay = DAYS.length ? DAYS[0].date : '';
+const tabsEl = document.getElementById('tabs');
+function renderTabs(){
+  tabsEl.innerHTML = '';
+  DAYS.forEach(d => {
+    const b = document.createElement('button');
+    b.textContent = d.date + '（' + d.items.length + '）';
+    if (selDay === d.date) b.className = 'on';
+    b.onclick = () => { selDay = d.date; renderTabs(); render(); };
+    tabsEl.appendChild(b);
+  });
+  const all = document.createElement('button');
+  all.textContent = '全部';
+  if (selDay === '__ALL__') all.className = 'on';
+  all.onclick = () => { selDay = '__ALL__'; renderTabs(); render(); };
+  tabsEl.appendChild(all);
+}
 function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-function card(i){
+function rowHtml(i){
   const hot = i.sold >= 100 ? '<span class="badge">热销</span>' : '';
-  return `<div class="card">
-    <div class="brand">${esc(i.b)} <span class="part">${esc(i.p)}</span>${hot}</div>
-    <div class="title">${esc(i.t)}</div>
-    <div class="row"><span class="price">${esc(i.price)}</span><span class="sold">${i.sold} sold</span></div>
-    <div class="row"><span class="k">成色</span><span>${esc(i.cond)}</span></div>
-    <div class="row"><span class="k">可售</span><span>${esc(i.avail)}</span></div>
-    <div class="row"><span class="k">卖家地</span><span>${esc(i.loc)}</span></div>
-    ${i.fit ? `<div class="row"><span class="k">适配/零件号</span><span style="text-align:right;max-width:65%">${esc(i.fit)}</span></div>` : ''}
-    ${i.note ? `<div class="note">${esc(i.note)}</div>` : ''}
-    <a href="https://www.ebay.com/itm/${i.id}" target="_blank" rel="noopener">eBay 刊登 itm/${i.id}</a>
+  return `<div class="rowitem">
+    <div class="main">
+      <div class="brand">${esc(i.b)} <span class="part">${esc(i.p)}</span>${hot}</div>
+      <div class="title">${esc(i.t)}</div>
+      ${i.fit ? `<div class="fit">适配/零件号：${esc(i.fit)}</div>` : ''}
+      ${i.note ? `<div class="note">${esc(i.note)}</div>` : ''}
+    </div>
+    <div class="side">
+      <div class="price">${esc(i.price)}</div>
+      <div class="sold">${i.sold} sold</div>
+      <div class="meta2">${esc(i.cond)} · ${esc(i.avail)}<br>${esc(i.loc)}</div>
+      <a href="https://www.ebay.com/itm/${i.id}" target="_blank" rel="noopener">eBay 刊登</a>
+    </div>
   </div>`;
 }
 function render(){
@@ -114,6 +142,7 @@ function render(){
   root.innerHTML = '';
   let any = false;
   DAYS.forEach(d => {
+    if (selDay !== '__ALL__' && d.date !== selDay) return;
     let items = d.items.filter(i => {
       if (bf && i.b !== bf) return false;
       if (hotOnly && i.sold < 100) return false;
@@ -138,7 +167,7 @@ function render(){
     items.forEach(i => { const g = i.grp || ''; if (!groups.includes(g)) groups.push(g); });
     groups.forEach(g => {
       if (g) h += `<div class="grp">${esc(g)}</div>`;
-      h += `<div class="grid">` + items.filter(i => (i.grp || '') === g).map(card).join('') + `</div>`;
+      h += `<div class="list">` + items.filter(i => (i.grp || '') === g).map(rowHtml).join('') + `</div>`;
     });
     sec.innerHTML = h;
     root.appendChild(sec);
@@ -149,6 +178,7 @@ function render(){
   document.getElementById(id).addEventListener('input', render);
   document.getElementById(id).addEventListener('change', render);
 });
+renderTabs();
 render();
 </script>
 </body>
